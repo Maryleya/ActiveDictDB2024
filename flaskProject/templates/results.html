@@ -1,0 +1,44 @@
+{% extends 'base.html' %}
+{% block content %}
+
+<div class="search mt-n1">
+    <h1>Результаты поиска</h1>
+
+</div>
+<!-- End Site Title
+================================================== -->
+<!-- Begin List Posts
+================================================== -->
+    {% if results == '' and error == '' %}
+        <br /><p class="lead">К сожалению, ничего не найдено. <a style="color: black; text-decoration: underline;" href="/search">Попробуйте ещё раз.</a></p>
+        <div style="padding: 10px; margin: 20px">
+            <p style="font-size: 24px"> {{ error }} </p>
+        </div>
+    {% elif results == '' and error != '' %}
+        <br /><p class="lead"> {{ error }} <a style="color: black; text-decoration: underline;" href="/search">Попробуйте ещё раз.</a></p>
+    {% elif results == [] %}
+        <br /><p class="lead"> {{ error }} <a style="color: black; text-decoration: underline;" href="/search">Попробуйте ещё раз.</a></p>
+    {% elif results != '' %}
+    <div class="list-wrapper">
+        {% for result in results %}
+            <div class="list-item">
+                <br />
+                <div class="card">
+                    <div class="card-header" style="color: black; text-decoration: underline;">
+                        <a href="/post/{{result[0]}}">{{result[0]}}</a>
+                    </div>
+                    <div class="card-body">
+                        <p class="card-text">Часть речи: {{ result[1] }}</p>
+                    </div>
+                </div>
+            </div>
+        {% endfor %}
+    </div>
+        <div id="pagination-container"></div>
+    {% endif %}
+
+<script rel="text/javascript" src="{{ url_for('static',filename='js/jquery.expander.js') }}"></script>
+<script rel="text/javascript" src="{{ url_for('static',filename='js/pagination.js') }}"></script>
+<script rel="text/javascript" src="{{ url_for('static',filename='js/results.js') }}"></script>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
+{% endblock %}

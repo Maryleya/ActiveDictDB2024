@@ -1,0 +1,83 @@
+{% extends 'base.html' %}
+
+{% block content %}
+
+<script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"></script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
+
+    <!-- End Site Title
+    ================================================== -->
+
+    <!-- Begin List Posts
+    ================================================== -->
+        <section class="recent-posts">
+
+            <div class="section-title">
+                <div class="btn-group d-flex" role="group" aria-label="First group">
+                {% if current_letter == 'all' %}
+                    <a href="/dictionary/all"
+                       button class="btn btn-secondary-letter-special px-2"
+                       style="color: white;
+                              background-color: red;">
+                        <h1 style="font-size: 1.5rem; text-align: center">
+                            Все буквы
+                        </h1>
+                        </a>
+                {% else %}
+                    <a href="/dictionary/all" button class="btn btn-secondary-letter-special px-2">
+                        <h1 style="font-size: 1.5rem; text-align: center">
+                            Все буквы
+                        </h1>
+                        </a>
+                {% endif %}
+                    {% for i in range(alphabet|length) %}
+                        {% if current_letter == alphabet[i]|lower %}
+                            <a href="/dictionary/{{ alphabet[i] }}"
+                               button class="btn btn-secondary-letter px-2"
+                                style="color: white;
+                                       background-color: red;">
+                                <h1 style="font-size: 1.5rem">{{ alphabet[i] }}</h1>
+                            </a>
+                        {% else %}
+                            <a href="/dictionary/{{ alphabet[i] }}"
+                               button class="btn btn-secondary-letter px-2">
+                                <h1 style="font-size: 1.5rem">{{ alphabet[i] }}</h1>
+                            </a>
+                        {% endif %}
+                    {% endfor %}
+                </div>
+            <hr style="margin-top: 0rem; margin-bottom: 0rem">
+            </div>
+
+                <!-- Генерация ссылок с буквами -->
+
+            <div class="list-wrapper">
+            <div class="card-columns-dictionary listrecent">
+                <!-- Карточка-->
+                {%for article in article_list %}
+                    <div class="list-item">
+                    <div class="card" style="margin-bottom: 0rem; margin-top: 1rem">
+                        <div class="card-block" style="margin-bottom: 0rem">
+                            <b><a href="/post/{{article.lexeme}}">
+                                {{article.lexeme}}
+                            </a>
+                                <small>
+                                    <br>Часть речи: {{ article.pos }}
+                                </small>
+                            </b>
+                        </div>
+                    </div>
+                    </div>
+                {% endfor %}
+            </div>
+            </div>
+        </section>
+    <div id="pagination-container"></div>
+
+    <script rel="text/javascript" src="{{ url_for('static',filename='js/jquery.expander.js') }}"></script>
+    <script rel="text/javascript" src="{{ url_for('static',filename='js/pagination.js') }}"></script>
+    <script rel="text/javascript" src="{{ url_for('static',filename='js/new_dictionary.js') }}"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
+
+{% endblock %}

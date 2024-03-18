@@ -1,0 +1,70 @@
+{% extends 'base.html' %}
+{% block content %}
+
+
+
+    <div class="search mt-n1">
+        <h1>Поиск</h1>
+        <p id="lead" class="lead">
+            Повседневная практика показывает, что консультация с широким активом позволяет выполнять важные задания по
+            разработке форм развития. С другой стороны начало повседневной работы по формированию позиции в значительной
+            степени обуславливает создание позиций, занимаемых участниками в отношении поставленных задач.
+        </p>
+    </div>
+
+    <!-- End Site Title
+    ================================================== -->
+
+    <!-- Begin List Posts
+    ================================================== -->
+    <div class="container-md">
+
+        <form method="get" action="/process">
+            <div class="search_form" style="margin-bottom: 5rem; margin-right: 2rem; margin-left: 1.2rem">
+
+                <!-- Поиск по заголовку -->
+                <!-- Разделитель -->
+                <!-- Расширенный поиск -->
+                <div class="card-body">
+                    <div class="input-group input-group-lg">
+                        <input id="q" name="q" type="text" class="form-control" placeholder="Введите заголовок статьи">
+                        <button class="btn btn-secondary" type="submit" style="border-radius: 0%; border-right-color: transparent; border-left-color: transparent">Искать</button>
+                        <button class="btn btn-secondary" type="reset" style="border-radius: 0rem 0.25rem 0.25rem 0rem">Очистить</button>
+                    </div>
+                    <hr style="margin-bottom: 0rem">
+                    <div class="row justify-content-around">
+                        <!-- Первая колонка -->
+                        <div class="col-sm-6">
+                            <div class="row">
+                                <label for="articlecontent" class="lead"><b>Поиск по тексту статьи</b></label>
+                                <input id="articlecontent" name="articlecontent" type="text" class="form-control" style="margin-bottom: 1.2rem; height: auto" placeholder="Введите текст из статьи">
+                            </div>
+
+                            <div class="col-sm-6" style="margin-right: -7rem">
+                                <label><p class="lead" style="margin-bottom: auto; margin-top: auto"><b>Часть речи</b></p></label>
+                                <div class="row">
+
+                                    <div class="col-sm-5">
+                                        {% for pos in poses %}
+                                        <div class="custom-controls-stacked">
+                                            <div class="custom-control custom-checkbox">
+                                                <input name="pos" id="{{ pos }}" type="checkbox" class="custom-control-input" value="{{ pos }}">
+                                                <label for="{{ pos }}" class="custom-control-label">
+                                                    <p class="lead" style="font-size: 1.1rem; margin-bottom: 0rem; line-height: 1rem">
+                                                        {{ pos }}
+                                                    </p>
+                                                </label>
+                                            </div>
+                                        </div>
+                                        {% endfor %}
+                                    </div>
+
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </form>
+    </div>
+{% endblock %}
